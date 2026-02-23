@@ -20,8 +20,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SERVER_PASSPHRASE }}
           script: |
-            cd /root
-            mkdir -p cicdex
-            cd cicdex
-            git pull || git clone https://github.com/Ernest2929/cicdex.git .
+            mkdir  Ernest
+            cd Ernest
+            git pull || git clone https://github.com/Ernest2929/cicdex.git
             echo "Deploy success $(date)" > deploy.txt
