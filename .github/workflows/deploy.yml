@@ -23,4 +23,4 @@ jobs:
             mkdir Ernest
             cd Ernest
             git clone https://github.com/Ernest2929/cicdex.git
-            echo "Deploy success
+            echo "Deploy success"
