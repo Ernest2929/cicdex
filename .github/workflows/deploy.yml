@@ -20,7 +20,16 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SERVER_PASSPHRASE }}
           script: |
-            mkdir  Ernest
-            cd Ernest
-            git pull || git clone https://github.com/Ernest2929/cicdex.git
-            echo "Deploy success $(date)" > deploy.txt
+
+            sudo tee /var/www/html/ernsest.html > /dev/null <<EOF
+            <!DOCTYPE html>
+            <html lang="uk">
+            <head>
+              <meta charset="UTF-8">
+              <title>Test Deploy</title>
+            </head>
+            <body>
+              <h1>Hi, I am Ernest, everything work.</h1>
+            </body>
+            </html>
+            EOF
