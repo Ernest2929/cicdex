@@ -20,16 +20,259 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SERVER_PASSPHRASE }}
           script: |
-
-            sudo tee /var/www/html/ernsest.html > /dev/null <<EOF
+            sudo tee /var/www/html/ernest.html > /dev/null <<'EOF'
             <!DOCTYPE html>
             <html lang="uk">
             <head>
-              <meta charset="UTF-8">
-              <title>Test Deploy</title>
-            </head>
-            <body>
-              <h1>Hi, I am Ernest, everything work.</h1>
-            </body>
-            </html>
-            EOF
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <title>Ernest CI/CD Dashboard</title>
+            <style>
+               :root{
+                --bg1:#0b1020;
+                --bg2:#111a33;
+                --card:rgba(255,255,255,.06);
+                --stroke:rgba(255,255,255,.12);
+                --text:rgba(255,255,255,.92);
+                --muted:rgba(255,255,255,.65);
+            --good:#22c55e;
+            --blue:#38bdf8;
+            --violet:#a78bfa;
+            --orange:#fb923c;
+            --shadow: 0 12px 40px rgba(0,0,0,.35);
+            --radius:18px;
+            }
+            *{box-sizing:border-box}
+            body{
+              margin:0;
+              font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+              color:var(--text);
+              background:
+                radial-gradient(1000px 500px at 20% 10%, rgba(56,189,248,.22), transparent 60%),
+                radial-gradient(900px 600px at 80% 20%, rgba(167,139,250,.18), transparent 60%),
+                radial-gradient(900px 700px at 50% 90%, rgba(34,197,94,.14), transparent 60%),
+                linear-gradient(180deg, var(--bg1), var(--bg2));
+              min-height:100vh;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              padding:24px;
+            }
+            .wrap{width:min(1100px, 100%);}
+            .top{
+              display:flex;
+              gap:14px;
+              align-items:center;
+              justify-content:space-between;
+              flex-wrap:wrap;
+              margin-bottom:18px;
+            }
+            .brand{
+              display:flex;
+              gap:12px;
+              align-items:center;
+            }
+            .logo{
+              width:44px;height:44px;border-radius:14px;
+              background: linear-gradient(135deg, rgba(56,189,248,.9), rgba(167,139,250,.9));
+              box-shadow: var(--shadow);
+              position:relative;
+            overflow:hidden;
+                }
+                .logo:before{
+            content:"";
+            position:absolute; inset:-30%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.8), transparent 45%);
+            transform: rotate(18deg);
+            }
+            .title{line-height:1.1;}
+            .title h1{font-size:18px; margin:0; letter-spacing:.2px;}
+            .title p{margin:3px 0 0 0; color:var(--muted); font-size:13px;}
+        
+            .pill{
+            display:inline-flex;
+            gap:8px;
+              align-items:center;
+              padding:10px 12px;
+              border:1px solid var(--stroke);
+              border-radius:999px;
+              background: rgba(255,255,255,.04);
+              box-shadow: 0 6px 20px rgba(0,0,0,.2);
+              backdrop-filter: blur(8px);
+              font-size:13px;
+                color:var(--muted);
+              }
+              .dot{
+                width:10px;height:10px;border-radius:50%;
+                background: var(--good);
+                box-shadow: 0 0 0 6px rgba(34,197,94,.14);
+              }
+          
+              .grid{
+                display:grid;
+                grid-template-columns: 1.4fr .9fr;
+                gap:16px;
+              }
+              @media (max-width: 900px){
+                .grid{grid-template-columns:1fr;}
+              }
+          
+              .card{
+                background: var(--card);
+                border:1px solid var(--stroke);
+                border-radius: var(--radius);
+                box-shadow: var(--shadow);
+                backdrop-filter: blur(10px);
+                overflow:hidden;
+              }
+              .hero{padding:22px;}
+              .hero h2{margin:0 0 10px 0; font-size:28px; letter-spacing:.2px;}
+              .hero p{margin:0 0 18px 0; color:var(--muted); font-size:14px; line-height:1.6;}
+          
+                      .stats{
+              display:grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap:12px;
+            }
+            @media (max-width: 560px){
+              .stats{grid-template-columns:1fr;}
+            }
+            .stat{
+              padding:14px;
+              border-radius:14px;
+              border:1px solid rgba(255,255,255,.10);
+              background: rgba(0,0,0,.16);
+            }
+            .stat .k{color:var(--muted); font-size:12px;}
+            .stat .v{font-size:18px; margin-top:6px;}
+        
+            .badge{
+              display:inline-flex;
+              align-items:center;
+              gap:8px;
+              padding:8px 10px;
+              border-radius:999px;
+              border:1px solid rgba(255,255,255,.12);
+              background: rgba(255,255,255,.05);
+              font-size:12px;
+              color:var(--muted);
+              margin-right:8px;
+              margin-top:10px;
+            }
+            .badge b{color:var(--text); font-weight:600}
+        
+            .row{
+              display:grid;
+              grid-template-columns: 1fr;
+              gap:16px;
+            }
+        
+            .panel{padding:18px;}
+            .panel h3{
+              margin:0 0 10px 0;
+              font-size:14px;
+              color:var(--muted);
+              letter-spacing:.3px;
+              text-transform:uppercase;
+            }
+            .steps{display:grid; gap:10px;}
+            .step{
+              display:flex;
+              gap:10px;
+              align-items:flex-start;
+              padding:12px;
+              border-radius:14px;
+              border:1px solid rgba(255,255,255,.10);
+              background: rgba(0,0,0,.14);
+            }
+            .ico{
+              width:34px;height:34px;border-radius:12px;
+              display:grid; place-items:center;
+              font-weight:700;
+              color:#06101f;
+              flex:0 0 auto;
+            }
+            .i1{background:rgba(56,189,248,.95)}
+            .i2{background:rgba(34,197,94,.95)}
+            .i3{background:rgba(251,146,60,.95)}
+            .i4{background:rgba(167,139,250,.95)}
+        
+            .step .txt{flex:1}
+            .step .txt b{display:block; margin-bottom:2px}
+            .step .txt span{color:var(--muted); font-size:13px; line-height:1.4}
+        
+            .footer{
+              padding:14px 18px;
+              border-top:1px solid rgba(255,255,255,.10);
+              display:flex;
+              justify-content:space-between;
+              gap:10px;
+              flex-wrap:wrap;
+              color:var(--muted);
+              font-size:12px;
+            }
+            .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+            a{color:var(--blue); text-decoration:none}
+            a:hover{text-decoration:underline}
+                         
+        
+              <div class="row">
+                <div class="card">
+                  <div class="panel">
+                    <h3>Pipeline steps</h3>
+                    <div class="steps">
+                      <div class="step">
+                        <div class="ico i1">1</div>
+                        <div class="txt">
+                          <b>Commit & Push</b>
+                          <span>Зміни в коді відправляються в GitHub.</span>
+                        </div>
+                      </div>
+        
+                      <div class="step">
+                        <div class="ico i2">2</div>
+                        <div class="txt">
+                          <b>GitHub Actions</b>
+                          <span>Workflow запускається на <span class="mono">push</span> в <span class="mono">main</span>.</span>
+                        </div>
+                      </div>
+        
+                      <div class="step">
+                        <div class="ico i3">3</div>
+                        <div class="txt">
+                          <b>SSH Deploy</b>
+                          <span>Action підключається до сервера по SSH і оновлює файли.</span>
+                        </div>
+                      </div>
+        
+                      <div class="step">
+                        <div class="ico i4">4</div>
+                        <div class="txt">
+                          <b>Live Result</b>
+                          <span>Цю сторінку видно в браузері одразу після деплою.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="footer">
+                    <div>Спробуй: змінити будь-який текст і зробити новий деплой.</div>
+                    <div>HTTP: <a href="/" class="mono">/</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          
+            <script>
+              const now = new Date();
+              const pad = (n) => String(n).padStart(2, "0");
+              const fmt = `${pad(now.getDate())}.${pad(now.getMonth()+1)}.${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+          
+              document.getElementById("time").textContent = fmt;
+              document.getElementById("updated").textContent = fmt;
+              document.getElementById("branch").textContent = "main";
+            </script>
+              </body>
+              </html>
+              EOF
