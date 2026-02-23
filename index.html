@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>CI/CD Lab</title>
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        h1 {
+            color: #38bdf8;
+        }
+        .box {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>CI/CD працює 🚀</h1>
+        <p>Деплой виконано через GitHub Actions</p>
+        <p>Дата: <span id="date"></span></p>
+    </div>
+
+    <script>
+        document.getElementById("date").innerText = new Date();
+    </script>
+</body>
+</html>
