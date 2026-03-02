@@ -257,7 +257,7 @@ jobs:
                 <div class="grid">
                   <div class="card">
                     <div class="hero">
-                      <h2>Автодеплой працює 🚀</h2>
+                      <h2>Автодеплой працює </h2>
                       <p>
                         Ця сторінка згенерована під час деплою на сервері. Будь-яка зміна в репозиторії →
                         <span class="mono">git push</span> → GitHub Actions → і зміни з’являються тут.
@@ -339,7 +339,7 @@ jobs:
               </div>
             
               <script>
-                // Красива дата/час на сторінці
+            
                 const now = new Date();
                 const pad = (n) => String(n).padStart(2, "0");
                 const fmt = `${pad(now.getDate())}.${pad(now.getMonth()+1)}.${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
@@ -347,10 +347,8 @@ jobs:
                 document.getElementById("time").textContent = fmt;
                 document.getElementById("updated").textContent = fmt;
             
-                // Якщо хочеш — можеш руками в deploy.yml підставляти branch/host.
-                // Тут просто дефолт:
                 document.getElementById("branch").textContent = "main";
               </script>
             </body>
             </html>
-                          EOF
+               
